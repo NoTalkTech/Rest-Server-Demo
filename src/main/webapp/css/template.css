@@ -1,0 +1,72 @@
+@charset "utf-8";
+
+body{
+    width:1116px;
+    margin:auto;
+    padding:0px;
+    background-color: #ededed;
+    color:#5b5b5b;
+}
+
+.scores{
+    width:100%;
+    height: 200px;
+    }
+    .cei_scores{
+        width: 25%;
+        height: 205px;
+        float:left;
+        }
+        .cei_scores_pic{
+            height: 190px;
+            margin: 10px 5px 5px 10px;
+            background-color: #ffffff;
+            }
+    .param_scores{
+        width: 75%;
+        height: 205px;
+        float:left;
+        }
+        .param_scores_pic{
+            height: 190px;
+            margin: 10px 10px 5px 5px;
+            background-color: #ffffff;
+            }
+
+.tablePic{
+    width: 52.91%;
+    float: left;
+    }
+    .rates_list{
+        height: 330px;
+        width: 100%;
+        float: left;
+        }
+        .rates_table{
+            margin: 5px 5px 5px 10px;
+            height: 320px;
+            background-color: #ffffff;
+            }
+    .kpi{
+        height: 330px;
+        width: 100%;
+        float:left;
+        }
+        .kpi_table{
+            margin: 5px 5px 5px 10px;
+            height: 320px;
+            background-color: #ffffff;
+        }
+
+
+.areamap{
+    width: 47.09%;
+    height: 660px;
+    float: left;
+    position: relative;
+    }
+    .areamap_pic{
+        margin: 5px 10px 5px 5px;
+        height: 650px;
+        background-color: #ffffff;
+        }
