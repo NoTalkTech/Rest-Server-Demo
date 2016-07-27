@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration scan="true" scanPeriod="60 seconds" debug="false">
+<configuration scan="true" scanPeriod="60 seconds" debug="true">
     <!-- definition of appender STDOUT -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -11,10 +11,12 @@
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
-        <file>./log/ltewebnew.log</file>
+        <file>./log/wallaceWebApp.log</file>
+
+
 
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>./log/ltewebnew.%i.log.zip</fileNamePattern>
+            <fileNamePattern>./log/wallaceWebApp.%i.log.zip</fileNamePattern>
             <minIndex>1</minIndex>
             <maxIndex>30</maxIndex>
         </rollingPolicy>
@@ -35,10 +37,10 @@
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
-        <file>./log/ltewebnew.debug.log</file>
+        <file>./log/wallaceWebApp.debug.log</file>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>./log/ltewebnew.debug.%i.log.zip</fileNamePattern>
+            <fileNamePattern>./log/wallaceWebApp.debug.%i.log.zip</fileNamePattern>
             <minIndex>1</minIndex>
             <maxIndex>5</maxIndex>
         </rollingPolicy>
@@ -54,7 +56,7 @@
     </appender>
 
 
-    <root level="INFO">
+    <root level="debug">
         <!-- appender referenced after it is defined -->
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE_INFO"/>
