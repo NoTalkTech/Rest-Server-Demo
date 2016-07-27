@@ -18,7 +18,7 @@ class MyServiceSpec extends Specification with Specs2RouteTest with MyService {
           s"""
              |[Entity]: ${response.entity.asString}
              |[Entity => Option]: ${response.entity.toOption}
-             |[Entity => Case Class]: ${responseAs[Person]}
+             |[Entity => Case Class]: ${responseAs[Map[String, Int]]}
              |[Message]: ${response.message}
              |[Protocol]: ${response.protocol}
              |[Status]: ${status.intValue}
@@ -26,9 +26,9 @@ class MyServiceSpec extends Specification with Specs2RouteTest with MyService {
 
         status.intValue mustEqual 200
 
-        response.entity.toOption.get.asString must contain("{\"name\":[\"Wallace\",\"Lina\",\"Lucy\"],\"age\":[25,26,24]}")
+        response.entity.toOption.get.asString must contain("{\"Wallace\":25,\"Lina\":26,\"Lucy\":24}")
 
-        responseAs[Person].name must contain("Wallace")
+        responseAs[Map[String, Int]].get("Wallace") mustEqual Some(25)
         //responseAs[String] must contain("test")
       }
 

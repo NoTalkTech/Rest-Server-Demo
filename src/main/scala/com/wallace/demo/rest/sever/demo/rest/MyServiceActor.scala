@@ -53,7 +53,9 @@ trait MyService extends HttpService with Json4sSupport with LogSupport {
         respondWithMediaType(`application/json`) {
           complete {
             try {
-              Person(List("Wallace", "Lina", "Lucy"), List(25, 26, 24))
+              val p = Person(List("Wallace", "Lina", "Lucy"), List(25, 26, 24))
+              val data: Map[String, Int] = p.name.zip(p.age).toMap
+              data
             } catch {
               case e: Exception =>
                 val msg = "Respond Failed!"
@@ -63,12 +65,12 @@ trait MyService extends HttpService with Json4sSupport with LogSupport {
         }
       }
     } ~
-    path("wallace" / "index") {
-      get {
-        complete {
-          "hello,world!"
+      path("wallace" / "index") {
+        get {
+          complete {
+            "hello,world!"
+          }
         }
       }
-    }
 }
 
