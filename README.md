@@ -1,4 +1,4 @@
-# Rest-Sever-Demo
-Rest-Sever-Demo
+# Rest-Server-Demo
+Rest-Server-Demo
 
 ## Add UT For Rest
