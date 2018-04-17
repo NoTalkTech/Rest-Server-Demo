@@ -10,10 +10,9 @@ import spray.testkit.Specs2RouteTest
 class MyServiceSpec extends Specification with Specs2RouteTest with MyService {
 
   def actorRefFactory: ActorRefFactory = system
-
   "MyService" should {
     "return Json String" in {
-      Get("/wallace") ~> myRoute ~> check {
+      Get("/wallace?name=huangbiyu&age=27") ~> myRoute ~> check {
         log.info(
           s"""
              |[Entity]: ${response.entity.asString}
@@ -26,9 +25,9 @@ class MyServiceSpec extends Specification with Specs2RouteTest with MyService {
 
         status.intValue mustEqual 200
 
-        response.entity.toOption.get.asString must contain("{\"Wallace\":25,\"Lina\":26,\"Lucy\":24}")
+        response.entity.toOption.get.asString must contain("{\"Wallace\":25,\"Lina\":26,\"Lucy\":24,\"huangbiyu\":27}")
 
-        responseAs[Map[String, Int]].get("Wallace") mustEqual Some(25)
+        responseAs[Map[String, Int]].get("Wallace") must beSome(25)
         //responseAs[String] must contain("test")
       }
 
