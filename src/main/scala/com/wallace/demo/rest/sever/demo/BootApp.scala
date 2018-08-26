@@ -1,7 +1,7 @@
 package com.wallace.demo.rest.sever.demo
 
 import akka.actor.{ActorRef, ActorSystem, Props}
-import com.wallace.demo.rest.sever.demo.rest.MyServiceActor
+import com.wallace.demo.rest.sever.demo.rest.AppServiceActor
 import spray.servlet.WebBoot
 
 /**
@@ -10,7 +10,10 @@ import spray.servlet.WebBoot
 class BootApp extends WebBoot {
   override def system: ActorSystem = Services.system
 
-  val apiActor: ActorRef = system.actorOf(Props[MyServiceActor], "MyService")
+  override def serviceActor: ActorRef =  system.actorOf(Props[AppServiceActor], "AppService")
 
-  override def serviceActor: ActorRef = apiActor
+  system.registerOnTermination {
+    // put additional cleanup code here
+    system.log.info("Application shut down")
+  }
 }

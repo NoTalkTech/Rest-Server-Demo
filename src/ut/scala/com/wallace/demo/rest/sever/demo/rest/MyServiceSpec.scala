@@ -7,7 +7,7 @@ import spray.testkit.Specs2RouteTest
 /**
   * Created by 10192057 on 2016/6/17.
   */
-class MyServiceSpec extends Specification with Specs2RouteTest with MyService {
+class MyServiceSpec extends Specification with Specs2RouteTest with AppServices {
 
   def actorRefFactory: ActorRefFactory = system
   "MyService" should {

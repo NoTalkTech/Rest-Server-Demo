@@ -3,6 +3,7 @@ package com.wallace.demo.rest.sever.demo.rest
 import akka.actor.{Actor, ActorRefFactory}
 import com.wallace.demo.rest.sever.demo.Services
 import com.wallace.demo.rest.sever.demo.common.LogSupport
+import com.wallace.demo.rest.sever.demo.database.DataBaseInfo
 import org.json4s.{DefaultFormats, Formats}
 import spray.http.MediaTypes._
 import spray.http._
@@ -12,14 +13,14 @@ import spray.routing._
 /**
   * Created by 10192057 on 2016/6/16.
   */
-class MyServiceActor extends Actor with MyService {
+class AppServiceActor extends Actor with AppServices {
   def receive: Receive = runRoute(myRoute)
 
   def actorRefFactory: ActorRefFactory = Services.actorRefFactory
 
 }
 
-trait MyService extends HttpService with Json4sSupport with LogSupport {
+trait AppServices extends HttpService with Json4sSupport with LogSupport {
 
   implicit def json4sFormats: Formats = DefaultFormats
 
@@ -87,6 +88,24 @@ trait MyService extends HttpService with Json4sSupport with LogSupport {
             "hello,world!"
           }
         }
+      } ~
+      path("wallace" / "redisclient") {
+        post {
+          decompressRequest() {
+            entity(as[DataBaseInfo]) { DataBaseInfo =>
+              detach() {
+                complete {
+                  try {
+                    //TODO Add redis client service
+                    DataBaseInfo.toString
+                  } catch {
+                    case e: Exception =>
+                      HttpResponse(500, e.getMessage)
+                  }
+                }
+              }
+            }
+          }
+        }
       }
 }
-
