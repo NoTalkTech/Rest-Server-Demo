@@ -1,6 +1,7 @@
 package com.wallace.demo.rest.sever.demo.rest
 
 import akka.actor.{Actor, ActorRefFactory}
+import com.wallace.demo.rest.sever.demo.Services
 import com.wallace.demo.rest.sever.demo.common.LogSupport
 import org.json4s.{DefaultFormats, Formats}
 import spray.http.MediaTypes._
@@ -14,7 +15,7 @@ import spray.routing._
 class MyServiceActor extends Actor with MyService {
   def receive: Receive = runRoute(myRoute)
 
-  def actorRefFactory: ActorRefFactory = context
+  def actorRefFactory: ActorRefFactory = Services.actorRefFactory
 
 }
 

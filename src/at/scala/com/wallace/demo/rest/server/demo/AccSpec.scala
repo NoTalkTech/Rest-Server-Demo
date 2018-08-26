@@ -1,6 +1,7 @@
 package com.wallace.demo.rest.server.demo
 
-import org.scalatest.{BeforeAndAfter, FeatureSpec, GivenWhenThen, ShouldMatchers}
+import org.scalatest.{BeforeAndAfter, FeatureSpec, GivenWhenThen}
+import org.specs2.matcher.ShouldMatchers
 import spray.testkit.ScalatestRouteTest
 
 /**

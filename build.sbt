@@ -8,7 +8,7 @@ name := "rest-sever-demo"
 
 version := "0.1"
 
-scalaVersion := "2.10.4"
+scalaVersion := "2.11.8"
 
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
 
@@ -37,7 +37,7 @@ testOptions in systemTest += Tests.Argument("-h","target/system-test-report")
 testOptions in systemTest += Tests.Argument("-o")
 
 
-libraryDependencies += "org.scalatest" % "scalatest_2.10" % "2.1.0" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.5" % "test"
 
 libraryDependencies += "org.apache.kafka" % "kafka-clients" % "0.8.2.1"
 
@@ -61,7 +61,7 @@ libraryDependencies ++= {
     "io.spray" %% "spray-json" % sprayV,
     "com.typesafe.akka" %% "akka-actor" % akkaV,
     "com.typesafe.akka" %% "akka-testkit" % akkaV % "test",
-    "org.json4s" %% "json4s-native" % "3.2.4",
+    "org.json4s" %% "json4s-native" % "3.2.11",
     "javax.servlet" % "javax.servlet-api" % "3.0.1" % "provided"
   )
 }
