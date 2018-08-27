@@ -1,7 +1,7 @@
 package com.wallace.demo.rest.sever.demo
 
 import akka.actor.{Actor, ActorRef, ActorRefFactory, ActorSystem, Props}
-import com.wallace.demo.rest.sever.demo.rest.AppServiceActor
+import com.wallace.demo.rest.sever.demo.rest.{AppServiceActor, RedisClientActor}
 import spray.routing.HttpService
 import spray.servlet.WebBoot
 
@@ -12,6 +12,7 @@ class BootApp extends WebBoot {
   override def system: ActorSystem = Services.system
 
   val appServiceActor: ActorRef = system.actorOf(Props[AppServiceActor], "AppService")
+  val redisClientActor: ActorRef = system.actorOf(Props[RedisClientActor], "RedisClient")
 
   class RootServiceActor extends Actor with HttpService {
     override def receive: Receive = runRoute {
@@ -20,6 +21,9 @@ class BootApp extends WebBoot {
       } ~
         pathPrefix("wallace") {
           appServiceActor ! _
+        } ~
+        pathPrefix("demo" / "redis") {
+          redisClientActor ! _
         }
     }
 

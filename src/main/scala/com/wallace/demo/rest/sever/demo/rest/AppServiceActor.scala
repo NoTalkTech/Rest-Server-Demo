@@ -1,7 +1,6 @@
 package com.wallace.demo.rest.sever.demo.rest
 
 import akka.actor.{Actor, ActorRefFactory}
-import com.wallace.demo.rest.sever.demo.Services
 import com.wallace.demo.rest.sever.demo.common.LogSupport
 import com.wallace.demo.rest.sever.demo.database.DataBaseInfo
 import com.wallace.demo.rest.sever.demo.services.app.common.Person
@@ -15,9 +14,9 @@ import spray.routing._
   * Created by 10192057 on 2016/6/16.
   */
 class AppServiceActor extends Actor with AppServices {
-  def receive: Receive = runRoute(myRoute)
+  def receive: Receive = runRoute(appRoute)
 
-  def actorRefFactory: ActorRefFactory = Services.actorRefFactory
+  def actorRefFactory: ActorRefFactory = context
 
 }
 
@@ -35,7 +34,7 @@ trait AppServices extends HttpService with Json4sSupport with LogSupport {
   //    }
   //  }
 
-  val myRoute: Route =
+  val appRoute: Route =
   //    path("test") {
   //      get {
   //        respondWithMediaType(`text/html`) {
