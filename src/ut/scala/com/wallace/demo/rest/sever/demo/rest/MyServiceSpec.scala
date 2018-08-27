@@ -12,7 +12,7 @@ class MyServiceSpec extends Specification with Specs2RouteTest with AppServices 
   def actorRefFactory: ActorRefFactory = system
   "MyService" should {
     "return Json String" in {
-      Get("/wallace?name=huangbiyu&age=27") ~> myRoute ~> check {
+      Get("/add?name=huangbiyu&age=27") ~> myRoute ~> check {
         log.info(
           s"""
              |[Entity]: ${response.entity.asString}
@@ -31,7 +31,7 @@ class MyServiceSpec extends Specification with Specs2RouteTest with AppServices 
         //responseAs[String] must contain("test")
       }
 
-      Get("/wallace/index") ~> myRoute ~> check {
+      Get("/index") ~> myRoute ~> check {
         status.intValue mustEqual 200
 
         response.entity.asString must contain("hello,world!")

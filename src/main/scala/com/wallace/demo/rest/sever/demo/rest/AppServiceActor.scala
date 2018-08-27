@@ -4,6 +4,7 @@ import akka.actor.{Actor, ActorRefFactory}
 import com.wallace.demo.rest.sever.demo.Services
 import com.wallace.demo.rest.sever.demo.common.LogSupport
 import com.wallace.demo.rest.sever.demo.database.DataBaseInfo
+import com.wallace.demo.rest.sever.demo.services.app.common.Person
 import org.json4s.{DefaultFormats, Formats}
 import spray.http.MediaTypes._
 import spray.http._
@@ -60,7 +61,7 @@ trait AppServices extends HttpService with Json4sSupport with LogSupport {
   //        }
   //      }
   //    } ~
-    path("wallace") {
+    path("add") {
       get {
         parameter('name, 'age) {
           (name: String, age: String) =>
@@ -82,14 +83,14 @@ trait AppServices extends HttpService with Json4sSupport with LogSupport {
         }
       }
     } ~
-      path("wallace" / "index") {
+      path("index") {
         get {
           complete {
             "hello,world!"
           }
         }
       } ~
-      path("wallace" / "redisclient") {
+      path("redisclient") {
         post {
           decompressRequest() {
             entity(as[DataBaseInfo]) { DataBaseInfo =>

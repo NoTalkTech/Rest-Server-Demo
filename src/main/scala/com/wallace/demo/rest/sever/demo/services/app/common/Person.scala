@@ -1,4 +1,4 @@
-package com.wallace.demo.rest.sever.demo.rest
+package com.wallace.demo.rest.sever.demo.services.app.common
 
 /**
   * Created by 10192057 on 2016/6/17.
