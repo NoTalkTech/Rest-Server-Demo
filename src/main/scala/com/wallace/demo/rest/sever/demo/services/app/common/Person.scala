@@ -23,7 +23,7 @@ object NewPersonProtocol extends DefaultJsonProtocol {
 
 }
 
-object Demo {
+object JsonTestDemo {
   def main(args: Array[String]): Unit = {
     import NewPersonProtocol._
     val newP = NewPerson("wallace", 23)
