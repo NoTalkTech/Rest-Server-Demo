@@ -1,9 +1,9 @@
 package com.wallace.demo.rest.sever.demo.rest
 
 import akka.actor.{Actor, ActorRefFactory}
+import com.wallace.demo.rest.sever.demo.apiservices.app.common.{NewPerson, Person}
 import com.wallace.demo.rest.sever.demo.common.LogSupport
 import com.wallace.demo.rest.sever.demo.database.DataBaseInfo
-import com.wallace.demo.rest.sever.demo.services.app.common.Person
 import org.json4s.{DefaultFormats, Formats}
 import spray.http.MediaTypes._
 import spray.http._
@@ -104,6 +104,27 @@ trait AppServices extends HttpService with Json4sSupport with LogSupport {
                   }
                 }
               }
+            }
+          }
+        }
+      } ~
+      path("newperson") {
+        post {
+          decompressRequest() {
+            entity(as[NewPerson]) {
+              person =>
+                detach() {
+                  complete {
+                    try {
+                      //TODO Add redis client service
+                      log.info(person.toString)
+                      "success"
+                    } catch {
+                      case e: Exception =>
+                        HttpResponse(500, e.getMessage)
+                    }
+                  }
+                }
             }
           }
         }
