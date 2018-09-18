@@ -7,13 +7,15 @@ import spray.testkit.Specs2RouteTest
 /**
   * Created by 10192057 on 2016/6/17.
   */
-class MyServiceSpec extends Specification with Specs2RouteTest with MyService {
+class AppServiceSpec extends Specification with Specs2RouteTest with AppServices {
 
   def actorRefFactory: ActorRefFactory = system
 
-  "MyService" should {
-    "return Json String" in {
-      Get("/wallace") ~> myRoute ~> check {
+  case class NewPerson(name: String, age: Int)
+
+  "ApiService" should {
+    "get person" in {
+      Get("/add?name=huangbiyu&age=27") ~> appRoute ~> check {
         log.info(
           s"""
              |[Entity]: ${response.entity.asString}
@@ -26,16 +28,31 @@ class MyServiceSpec extends Specification with Specs2RouteTest with MyService {
 
         status.intValue mustEqual 200
 
-        response.entity.toOption.get.asString must contain("{\"Wallace\":25,\"Lina\":26,\"Lucy\":24}")
+        response.entity.toOption.get.asString must contain("{\"Wallace\":25,\"Lina\":26,\"Lucy\":24,\"huangbiyu\":27}")
 
-        responseAs[Map[String, Int]].get("Wallace") mustEqual Some(25)
+        responseAs[Map[String, Int]].get("Wallace") must beSome(25)
         //responseAs[String] must contain("test")
       }
+    }
+  }
 
-      Get("/wallace/index") ~> myRoute ~> check {
+  "ApiService" should {
+    "get index" in {
+      Get("/index") ~> appRoute ~> check {
         status.intValue mustEqual 200
 
         response.entity.asString must contain("hello,world!")
+      }
+    }
+  }
+
+  "ApiService" should {
+    "post new person" in {
+      val context: Option[NewPerson] = Option(NewPerson("wallace", 27))
+      Post("/newperson", context) ~> appRoute ~> check {
+        status.intValue mustEqual 200
+
+        response.entity.asString must contain("success")
       }
     }
   }
