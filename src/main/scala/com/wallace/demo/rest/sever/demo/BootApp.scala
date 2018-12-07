@@ -9,7 +9,7 @@ import spray.servlet.WebBoot
   * Created by wallace on 2018/8/26.
   */
 class BootApp extends WebBoot {
-  override def system: ActorSystem = Services.system
+  override def system: ActorSystem = ActorSystem("rest-server-demo")
 
   val appServiceActor: ActorRef = system.actorOf(Props[AppServiceActor], "AppService")
   val redisClientActor: ActorRef = system.actorOf(Props[RedisClientActor], "RedisClient")
