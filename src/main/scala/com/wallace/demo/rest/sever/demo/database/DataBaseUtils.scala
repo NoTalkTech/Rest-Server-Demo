@@ -14,7 +14,7 @@ object DataBaseUtils extends Using {
     val tmp: ArrayBuffer[Array[String]] = new ArrayBuffer[Array[String]]()
     val columnCount: Int = rs.getMetaData.getColumnCount //获得列数    
     while (rs.next()) {
-      val row: Array[String] = (0 to columnCount).map(i => s"${rs.getObject(i)}").toArray[String]
+      val row: Array[String] = (1 to columnCount).map(i => s"${rs.getObject(i)}").toArray[String]
       tmp.append(row)
     }
     tmp.result().toArray[Array[String]]
