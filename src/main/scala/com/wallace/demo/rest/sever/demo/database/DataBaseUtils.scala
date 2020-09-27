@@ -10,6 +10,16 @@ import scala.util.{Failure, Success, Try}
   * Created by 10192057 on 2018/4/17 0017.
   */
 object DataBaseUtils extends Using {
+   implicit def resultSetToArray[String](rs: ResultSet): Array[Array[String]] = {
+    val tmp: ArrayBuffer[Array[String]] = new ArrayBuffer[Array[String]]()
+    val columnCount: Int = rs.getMetaData.getColumnCount //获得列数    
+    while (rs.next()) {
+      val row: Array[String] = (0 to columnCount).map(i => s"${rs.getObject(i)}").toArray[String]
+      tmp.append(row)
+    }
+    tmp.result().toArray[Array[String]]
+  }
+ 
   //TODO implement jdbc driver
   def createConnection(configData: DataBaseInfo): Connection = {
     log.debug(s"DataBase Config: $configData.")
